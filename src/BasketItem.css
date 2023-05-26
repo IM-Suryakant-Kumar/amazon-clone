@@ -1,0 +1,43 @@
+.basketitem {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  max-height: 400px;
+  min-width: 100px;
+  background-color: white;
+  z-index: 1;
+}
+
+.basketitem > img {
+  width: 100%;
+  max-width: 130px;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.basketitem__info {
+  align-self: flex-start;
+}
+
+.basketitem__title {
+  font-weight: 700;
+}
+
+.basketitem__price {
+  margin-top: 5px;
+}
+
+.basketitem__rating {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.basketitem__info > button {
+  background-color: #f0c14b;
+  border: 1px solid;
+  margin-top: 10px;
+  border-color: #a88734 #9c7e31 #846a29;
+  color: #111;
+}
+

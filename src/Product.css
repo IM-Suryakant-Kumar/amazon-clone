@@ -24,10 +24,7 @@
 
 .product__rating {
   display: flex;
-}
-
-.product__rating > p {
-  margin-right: 4px;
+  gap: 4px;
 }
 
 .product > img {
