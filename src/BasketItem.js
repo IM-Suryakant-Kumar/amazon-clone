@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./BasketItem.css";
-import { CartContext } from "./CartContext";
+import { CartContextConsumer } from "./CartContext";
 
 const BasketItem = ({ product: { id, img, title, price, rating } }) => {
-  const { basket, setBasket } = useContext(CartContext);
-
-  const removeFromBasket = () => {
+  const removeFromBasket = (basket, setBasket) => {
     setBasket(basket.filter((product) => product.id !== id));
   };
 
@@ -29,7 +27,13 @@ const BasketItem = ({ product: { id, img, title, price, rating } }) => {
             ))}
         </div>
 
-        <button onClick={removeFromBasket}>Remove from basket</button>
+        <CartContextConsumer>
+          {({ basket, setBasket }) => (
+            <button onClick={() => removeFromBasket(basket, setBasket)}>
+              Remove from basket
+            </button>
+          )}
+        </CartContextConsumer>
       </div>
     </div>
   );

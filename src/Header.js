@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { NavLink } from "react-router-dom";
-import { CartContext } from "./CartContext";
+import { CartContextConsumer } from "./CartContext";
 
 const Header = () => {
-  const { basket } = useContext(CartContext);
-  const totalBasket = basket?.length;
-
   return (
     <div className="header">
       <NavLink to="/">
@@ -46,9 +43,13 @@ const Header = () => {
         <NavLink to="/checkout">
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
-            <span className="header__optionLineTwo header__basketCount">
-              {totalBasket}
-            </span>
+            <CartContextConsumer>
+              {({ basket }) => (
+                <span className="header__optionLineTwo header__basketCount">
+                  {basket.length}
+                </span>
+              )}
+            </CartContextConsumer>
           </div>
         </NavLink>
       </div>

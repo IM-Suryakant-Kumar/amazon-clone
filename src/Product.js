@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./Product.css";
-import { CartContext } from "./CartContext";
+import { CartContextConsumer } from "./CartContext";
 
 const Product = ({ id, title, price, rating, img }) => {
-  const { setBasket } = useContext(CartContext);
 
-  const addToBasket = () => {
-    setBasket((prevBasket) => [
-      ...prevBasket,
-      { id, title, price, rating, img },
-    ]);
+  const addToBasket = (basket, setBasket) => {
+    setBasket([...basket, { id, title, price, rating, img }]);
   };
 
   return (
@@ -32,7 +28,11 @@ const Product = ({ id, title, price, rating, img }) => {
         src={img}
         alt=""
       />
-      <button onClick={addToBasket}>Add to basket</button>
+      <CartContextConsumer>
+        {({basket, setBasket}) => (
+          <button onClick={() => addToBasket(basket, setBasket)}>Add to basket</button>
+        )}
+      </CartContextConsumer>
     </div>
   );
 };
