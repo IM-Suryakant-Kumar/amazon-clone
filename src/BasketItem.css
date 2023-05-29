@@ -1,26 +1,22 @@
 .basketitem {
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  max-height: 400px;
-  min-width: 100px;
-  background-color: white;
-  z-index: 1;
+  margin: 20px 0;
 }
 
 .basketitem > img {
-  width: 100%;
-  max-width: 130px;
-  max-height: 150px;
   object-fit: contain;
+  width: 150px;
+  height: 180px;
+  aspect-ratio: 0.6;
 }
 
 .basketitem__info {
-  align-self: flex-start;
+  padding-left: 20px;
 }
 
 .basketitem__title {
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
 }
 
 .basketitem__price {
@@ -40,4 +36,3 @@
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
 }
-
