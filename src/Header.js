@@ -1,11 +1,14 @@
 import React from "react";
-import "./Header.css";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import { NavLink } from "react-router-dom";
-import { CartContextConsumer } from "./CartContext";
+
+import "./Header.css";
 
 const Header = () => {
+  const cart = useSelector((state) => state);
+
   return (
     <div className="header">
       <NavLink to="/">
@@ -43,13 +46,9 @@ const Header = () => {
         <NavLink to="/checkout">
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
-            <CartContextConsumer>
-              {({ basket }) => (
-                <span className="header__optionLineTwo header__basketCount">
-                  {basket.length}
-                </span>
-              )}
-            </CartContextConsumer>
+            <span className="header__optionLineTwo header__basketCount">
+              {cart.length}
+            </span>
           </div>
         </NavLink>
       </div>

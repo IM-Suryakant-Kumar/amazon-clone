@@ -1,10 +1,16 @@
 import React from "react";
-import "./BasketItem.css";
-import { CartContextConsumer } from "./CartContext";
+import { useDispatch } from "react-redux";
 
-const BasketItem = ({ product: { id, img, title, price, rating } }) => {
-  const removeFromBasket = (basket, setBasket) => {
-    setBasket(basket.filter((product) => product.id !== id));
+import { removeFromCart } from "./redux";
+import "./BasketItem.css";
+
+const BasketItem = ({
+  product: { id, img, title, price, rating }
+}) => {
+  const dispatch = useDispatch()
+
+  const dispatchRemoveFromCart = () => {
+    dispatch(removeFromCart(id))
   };
 
   return (
@@ -27,13 +33,9 @@ const BasketItem = ({ product: { id, img, title, price, rating } }) => {
             ))}
         </div>
 
-        <CartContextConsumer>
-          {({ basket, setBasket }) => (
-            <button onClick={() => removeFromBasket(basket, setBasket)}>
-              Remove from basket
-            </button>
-          )}
-        </CartContextConsumer>
+        <button onClick={dispatchRemoveFromCart}>
+          Remove from basket
+        </button>
       </div>
     </div>
   );

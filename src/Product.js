@@ -1,12 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { addToCart } from "./redux";
 import "./Product.css";
-import { CartContextConsumer } from "./CartContext";
 
 const Product = ({ id, title, price, rating, img }) => {
+  const dispatch = useDispatch();
 
-  const addToBasket = (basket, setBasket) => {
-    setBasket([...basket, { id, title, price, rating, img }]);
-  };
+  const dispatchAddToCart = () => {
+    dispatch(addToCart({ id, title, price, rating, img }))
+  }
 
   return (
     <div className="product">
@@ -28,11 +31,7 @@ const Product = ({ id, title, price, rating, img }) => {
         src={img}
         alt=""
       />
-      <CartContextConsumer>
-        {({basket, setBasket}) => (
-          <button onClick={() => addToBasket(basket, setBasket)}>Add to basket</button>
-        )}
-      </CartContextConsumer>
+      <button onClick={dispatchAddToCart}>Add to basket</button>
     </div>
   );
 };
