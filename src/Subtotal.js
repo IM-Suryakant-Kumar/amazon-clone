@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./Subtotal.css";
 
 const Subtotal = () => {
-  const cart = useSelector(state => state);
+  const cart = useSelector(state => state.cart);
   
   const totalCart = cart.length;
   const totalCartPrice = cart.reduce((total, product) => total + product.price , 0)

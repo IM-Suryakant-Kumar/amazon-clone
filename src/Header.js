@@ -1,13 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-
+import { setUser } from "./redux";
+import { handleSignOut } from "./firebase"
 import "./Header.css";
 
 const Header = () => {
-  const cart = useSelector((state) => state);
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const handleAuthentication = () => {
+    if(user) {
+      handleSignOut(dispatch, setUser)
+    }
+  }
 
   return (
     <div className="header">
@@ -28,10 +38,10 @@ const Header = () => {
       </div>
 
       <div className="header__nav">
-        <NavLink to="/login">
-          <div className="header__option">
+        <NavLink to={ !user && "/login"}>
+          <div onClick={handleAuthentication} className="header__option">
             <span className="header__optionLineOne">Hello Guest</span>
-            <span className="header__optionLineTwo">Sign In</span>
+            <span className="header__optionLineTwo">{user ? "Sign out" : "Sign In"}</span>
           </div>
         </NavLink>
 

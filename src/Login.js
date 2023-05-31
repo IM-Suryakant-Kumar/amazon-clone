@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
+import { createUser, signInUser } from "./firebase"
 import "./Login.css";
 
 const Login = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const navigate = useNavigate()
 
 	const signIn = e => {
 		e.preventDefault()
-
+		signInUser(email, password, navigate)
 		// some fancy firebase login shittt...
 	}
 	const register = e => {
-		
-		// do some fancy firebase register shittt...
+		createUser(email, password, navigate)
 	}
 
 	return (
@@ -31,19 +32,21 @@ const Login = () => {
 				<h1>Sign In</h1>
 
                 <form>
-                    <label for="email">E-mail</label>
+                    <label htmlFor="email">E-mail</label>
                     <input 
 						type="text" 
 						id="email" 
-						value={email} 
+						value={email}
+						autoComplete="true"
 						onChange={e => setEmail(e.target.value)} 
 					/>
 
-					<label for="password">Password</label>
+					<label htmlFor="password">Password</label>
 					<input 
 						type="password" 
 						id="password" 
-						value={password} 
+						value={password}
+						autoComplete="true" 
 						onChange={e => setPassword(e.target.value)} 
 					/>
 

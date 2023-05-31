@@ -26,6 +26,7 @@ const BasketItem = ({
           <strong>{price}</strong>
         </p>
         <div className="basketitem__rating">
+        
           {Array(rating)
             .fill()
             .map((_, i) => (

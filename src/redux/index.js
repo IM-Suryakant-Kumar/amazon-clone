@@ -14,25 +14,37 @@ export function removeFromCart(productId) {
   }
 }
 
-const cart = JSON.parse(localStorage.getItem("cart"))
-const initialState = cart || []
+export function setUser(user) {
+  return {
+    type: "SET_USER",
+    payload: user
+  }
+}
 
-function reducer(cart = initialState, action) {
+const savedStateObj = JSON.parse(localStorage.getItem("stateObj"))
+const initialState = savedStateObj || {
+  cart: [],
+  user: null
+}
+
+function reducer(state = initialState, action) {
   switch(action.type) {
     case "ADD_TO_CART":
-      return [...cart, action.payload]
+      return { ...state, cart: [...state.cart, action.payload] }
     case "REMOVE_FROM_CART": {
-      const updatedCart = cart.filter(product => (product.id).toString() !== (action.payload).toString())
-      return updatedCart
+      const updatedCart = state.cart.filter(product => product.id !== action.payload)
+      return {...state, cart: updatedCart}
     }
+    case "SET_USER":
+      return {...state, user: action.payload}
     default:
-      return cart
+      return state
   }
 }
 
 const store = createStore(reducer)
 store.subscribe(() => {
-  localStorage.setItem("cart", JSON.stringify(store.getState()))
+  localStorage.setItem("stateObj", JSON.stringify(store.getState()))
   console.log(store.getState())
 })
 
