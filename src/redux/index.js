@@ -21,6 +21,10 @@ export function setUser(user) {
   }
 }
 
+export function getCartTotalPrice(cart) {
+    return cart.reduce((total, product) => total + product.price, 0)
+}
+
 const savedStateObj = JSON.parse(localStorage.getItem("stateObj"))
 const initialState = savedStateObj || {
   cart: [],

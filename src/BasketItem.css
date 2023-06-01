@@ -1,40 +1,39 @@
 .basketitem {
-  display: flex;
-  margin: 20px 0;
+	display: flex;
+	margin: 20px;
 }
 
 .basketitem > img {
-  object-fit: contain;
-  width: 150px;
-  height: 180px;
-  aspect-ratio: 0.6;
+	max-height: 180px;
+	object-fit: contain;
+	aspect-ratio: 0.6;
 }
 
 .basketitem__info {
-  padding-left: 20px;
+	padding-left: 20px;
 }
 
 .basketitem__title {
-  font-size: 17px;
-  font-weight: 800;
+	font-size: 17px;
+	font-weight: 800;
 }
 
 .basketitem__price {
-  margin-top: 5px;
+	margin-top: 5px;
 }
 
 .basketitem__rating {
-  display: flex;
-  gap: 4px;
-  margin-top: 5px;
+	display: flex;
+	gap: 4px;
+	margin-top: 5px;
 }
 
 .basketitem__info > button {
-  background-color: #f0c14b;
-  border: 1px solid;
-  margin-top: 10px;
-  border-color: #a88734 #9c7e31 #846a29;
-  color: #111;
-  padding: 1px 6px;
-  border-radius: 2px;
+	background-color: #f0c14b;
+	border: 1px solid;
+	margin-top: 10px;
+	border-color: #a88734 #9c7e31 #846a29;
+	color: #111;
+	padding: 1px 6px;
+	border-radius: 2px;
 }
