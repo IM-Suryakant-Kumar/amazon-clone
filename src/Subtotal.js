@@ -7,7 +7,7 @@ const Subtotal = () => {
   const cart = useSelector(state => state.cart);
   
   const totalCart = cart.length;
-  const totalCartPrice = cart.reduce((total, product) => total + product.price , 0)
+  const totalCartPrice = cart.reduce((total, product) => total + product.price , 0).toFixed(2)
   
   return (
     <div className="subtotal">

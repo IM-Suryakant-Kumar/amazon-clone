@@ -5,13 +5,12 @@ import { removeFromCart } from "./redux";
 import "./BasketItem.css";
 
 const BasketItem = ({
-  product: { id, img, title, price, rating }, setIsSuffle
+  product: { id, img, title, price, rating }
 }) => {
   const dispatch = useDispatch()
 
   const dispatchRemoveFromCart = () => {
     dispatch(removeFromCart(id))
-    setIsSuffle(prevState => !prevState)
   };
 
   return (
