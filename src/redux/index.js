@@ -25,6 +25,12 @@ export function getCartTotalPrice(cart) {
     return cart.reduce((total, product) => total + product.price, 0)
 }
 
+export function emptyCart() {
+    return {
+        type: "EMPTY_CART"
+    }
+}
+
 const savedStateObj = JSON.parse(localStorage.getItem("stateObj"))
 const initialState = savedStateObj || {
   cart: [],
@@ -41,6 +47,8 @@ function reducer(state = initialState, action) {
     }
     case "SET_USER":
       return {...state, user: action.payload}
+    case "EMPTY":
+        return { ...state, cart: [] }
     default:
       return state
   }

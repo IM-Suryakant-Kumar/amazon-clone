@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import CurrencyFormat from "react-currency-format"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import axios from "axios"
 
 import BasketItem from "./BasketItem"
-import { getCartTotalPrice } from "./redux"
-import axios from "./axios"
+import { getCartTotalPrice, emptyCart } from "./redux"
 import "./Payment.css"
 
 const Payment = () => {
@@ -14,6 +14,7 @@ const Payment = () => {
 
 	const user = useSelector((state) => state.user)
 	const cart = useSelector((state) => state.cart)
+    const dispatch = useDispatch()
 
     const stripe = useStripe()
     const elements = useElements()
@@ -24,18 +25,28 @@ const Payment = () => {
     const [disabled, setDisabled] = useState(true)
     const [clientSecret, setClientSecret] = useState(true)
 
+
     useEffect(() => {
-        // generate the stripe secret which allows ut to charge a customer
-        const getClientSecret = async () => {
-            const response = await axios({
-                method: "post",
-                // Stripe expect the total in a currencies subunits
-                url: `/payments/create?.total=${getCartTotalPrice(cart) / 82}`
-            })
-            setClientSecret(response.data.clientSecret)
+        const getClientSecret = async() => {
+            try {
+                const options = {
+                    method: 'POST',
+                    url: 'http://127.0.0.1:5001/clone-c6080/us-central1/api/payments/create',
+                    params: {total: '200'}
+                };
+                  
+                const res = await axios.request(options)
+                console.log(res.data);
+                setClientSecret(res.data.clientSecret)
+            } catch (error) {
+                console.log(error)
+            }
         }
         getClientSecret()
+
     }, [cart])
+
+    console.log("THE SECRET IS >>>", clientSecret)
 
     const handleSubmit = async (e) => {
         // do all the fancy stripe stuff
@@ -46,12 +57,14 @@ const Payment = () => {
             payment_method: {
                 card: elements.getElement(CardElement)
             }
-        }).then(({ paymentIndent }) => {
+        }).then(({ paymentIntent }) => {
             // paymentIndent = payment confirmation
 
             setSucceeded(true)
             setError(null)
             setProcessing(false)
+
+            dispatch(emptyCart())
 
             navigate("/order", { replace: true })
         })

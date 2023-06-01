@@ -11,6 +11,7 @@ import Login from "./Login"
 import Payment from "./Payment"
 import { trackUserOnAuthStateChanged } from "./firebase";
 import { setUser } from "./redux";
+import Orders from "./Orders"
 import "./App.css";
 
 const promise = loadStripe("pk_test_51NE5HoSB0RMAP83ETe0jUwGuLgkQimzw1A50oiok0Z3VYBYsMZGRdXSPzrykSHf9rYl78eu13myAMbHjtZTaWoF300kIuJdy9s")
@@ -57,6 +58,16 @@ function App() {
                             <Elements stripe={promise}>
                                 <Payment />
                             </Elements>
+                        </div>
+                    }
+                />
+
+                <Route
+                    path="/orders"
+                    element={
+                        <div>
+                            <Header />
+                            <Orders />
                         </div>
                     }
                 />
