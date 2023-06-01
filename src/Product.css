@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 10px;
   padding: 20px;
   width: 100%;
@@ -14,8 +14,7 @@
 
 .product__info {
   align-self: flex-start;
-  height: 100px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .product__price {
@@ -28,9 +27,10 @@
 }
 
 .product > img {
-  max-height: 200px;
   width: 100%;
+  max-height: 150px;
   object-fit: contain;
+  aspect-ratio: 0.5;
   margin-bottom: 15px;
 }
 
@@ -40,4 +40,6 @@
   margin-top: 10px;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+  padding: 2px 20px;
+  border-radius: 4px;
 }
