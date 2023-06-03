@@ -6,11 +6,12 @@ import {
     onAuthStateChanged,
     signOut
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore/lite";
+import { getFirestore } from "@firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyArHMjxL_40Z2VDjY0Znq4V-3QSYGZKXKM",
     authDomain: "clone-c6080.firebaseapp.com",
+    databaseURL: "https://clone-c6080-default-rtdb.asia-southeast1.firebasedatabase.app/",
     projectId: "clone-c6080",
     storageBucket: "clone-c6080.appspot.com",
     messagingSenderId: "480540112486",
@@ -64,4 +65,4 @@ export const handleSignOut = (dispatch, setUser) => {
     }).catch(err => console.log(err))
 }
 
-export { createUser, signInUser, trackUserOnAuthStateChanged }
+export { createUser, signInUser, trackUserOnAuthStateChanged, db }
