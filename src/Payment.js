@@ -93,8 +93,7 @@ const Payment = () => {
 		<div className="payment">
 			<div className="payment__container">
 				<h1>
-					Checkout (
-					{<NavLink to="/checkout">{cart.length} items</NavLink>})
+					Checkout ({<NavLink to="/checkout">{cart.length} items</NavLink>})
 				</h1>
 
 				{/* Payment section - delivery address */}
@@ -134,27 +133,15 @@ const Payment = () => {
 
 							<div className="payment__price_container">
 								<CurrencyFormat
-									renderText={(value) => (
-										<h3>Order Total: {value}</h3>
-									)}
+									renderText={(value) => <h3>Order Total: {value}</h3>}
 									value={getCartTotalPrice(cart)}
 									decimalScale={2}
 									displayType={"text"}
 									thousandSeparator={true}
 									prefix={"$"}
 								/>
-								<button
-									disabled={
-										processing || disabled || succeeded
-									}
-								>
-									<span>
-										{processing ? (
-											<p>Processing</p>
-										) : (
-											"Buy Now"
-										)}
-									</span>
+								<button disabled={processing || disabled || succeeded}>
+									<span>{processing ? <p>Processing</p> : "Buy Now"}</span>
 								</button>
 							</div>
 
